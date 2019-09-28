@@ -25,7 +25,8 @@ public class EncodeData {
             return;
         } else {// -f -t | -f -t -v
             for (int k = 0; k < types.length; k++) {
-                if (ConstantUtil.INT.equals(types[k]) || ConstantUtil.UINT.equals(types[k])) {
+                if (ConstantUtil.INT.equals(types[k]) || ConstantUtil.UINT.equals(types[k])
+                   || types[k].equals(ConstantUtil.BYTES.substring(0, ConstantUtil.BYTES.length() - 1))) {
                     types[k] = TypeEnum.fromName(types[k]).getAccpCode();
                 } else if (types[k].indexOf(ConstantUtil.INTLZ) > -1 || types[k].indexOf(ConstantUtil.UINTRZ) > -1) {
                     //获取uint or int
