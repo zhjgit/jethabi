@@ -2,7 +2,8 @@ package com.sumingk.enums;
 
 public enum TypeEnum {
     UINT("uint", "Uint", "uint256"),
-    INT("int", "Int", "int256");
+    INT("int", "Int", "int256"),
+    BYTE("byte", "Bytes1", "bytes1");
 
     private String baseCode;
     private String typeCode;
