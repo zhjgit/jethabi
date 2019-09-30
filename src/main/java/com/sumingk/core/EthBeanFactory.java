@@ -69,6 +69,18 @@ public class EthBeanFactory {
         int length = value.length;
         return length >= 0 && length <= byteSize;
     }
+    
+    /**
+     * 获取字符串中数值类型
+     *
+     * @param baseType
+     * @return
+     */
+    static int getTypeNum(String baseType) {
+        String regEx = "[^0-9]";
+        Matcher m = Pattern.compile(regEx).matcher(baseType);
+        return Integer.valueOf(m.replaceAll("").trim());
+    }
 
 
     /**
@@ -101,7 +113,8 @@ public class EthBeanFactory {
     public static <T> T getNumericTypeBean(Class<?> clazz, BigInteger value) {
         String type = EncodeData.getActualType(clazz);
         // (Fixed,Ufixed 校验参算法与uint不一样)  需要做兼容
-        int num = Integer.valueOf(type.replace(TypeEnum.fromAccpCode(type).getTypeCode(), ""));
+        //int num = Integer.valueOf(type.replace(TypeEnum.fromAccpCode(type).getTypeCode(), ""));
+        int num = getTypeNum(type);
         if (!isValidBitCount(num, value)) {
             try {
                 throw new Exception("Error: Supplied " + type.toLowerCase() + " exceeds width: " + num + " vs " + value.bitLength());
